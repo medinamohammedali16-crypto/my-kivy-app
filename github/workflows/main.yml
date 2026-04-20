@@ -1,11 +1,19 @@
 name: Build APK  
-on: [push, pull_request]  
+  
+on:  
+  push:  
+    branches: [ main ]  
+  pull_request:  
+    branches: [ main ]  
+  workflow_dispatch: # ይህ መስመር በእጅ "Run workflow" የሚለውን ቁልፍ እንዲያመጣልህ ይረዳል  
   
 jobs:  
   build:  
     runs-on: ubuntu-latest  
+  
     steps:  
-      - uses: actions/checkout@v3  
+      - name: Checkout code  
+        uses: actions/checkout@v3  
   
       - name: Buildozer Action  
         uses: ArtemSerebriennikov/buildozer-action@v1  
@@ -13,6 +21,9 @@ jobs:
           workdir: .  
           buildozer_version: master  
   
+      - name: Upload APK artifact  
+        uses: actions/checkout@v3 # ይህን ክፍል መጠናቀቁን ለማረጋገጥ ይጠቅማል  
+          
       - name: Upload APK  
         uses: actions/upload-artifact@v3  
         with:  
