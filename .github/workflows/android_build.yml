@@ -15,6 +15,7 @@ jobs:
   
       - name: Build with Buildozer  
         run: |  
+          # 'yes |' ትዕዛዙ ሁሉንም ጥያቄዎች በራሱ "እሺ" እንዲል ያደርገዋል  
           yes | /home/runner/.local/bin/buildozer -v android debug  
   
       - name: Upload APK  
